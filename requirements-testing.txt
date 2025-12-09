@@ -1,0 +1,15 @@
+# Testing frameworks
+pytest==7.4.4
+pytest-asyncio==0.23.3
+pytest-cov==4.1.0
+pytest-mock==3.14.0
+
+# Para pruebas con datos
+pandas==2.2.3
+openpyxl==3.1.2
+
+# Para mocks avanzados
+freezegun==1.5.0
+
+# Coverage reporting
+coverage==7.10.7

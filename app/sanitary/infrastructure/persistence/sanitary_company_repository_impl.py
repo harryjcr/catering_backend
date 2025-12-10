@@ -5,14 +5,13 @@ import sqlalchemy as sa
 from sqlalchemy.dialects.postgresql import UUID as PG_UUID
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
-from sqlalchemy.orm import Mapped, mapped_column, declarative_base
+from sqlalchemy.orm import Mapped, mapped_column
 
+from app.shared.database.connection import Base
 from app.sanitary.application.ports.sanitary_company_repository import (
     SanitaryCompanyRepository,
 )
 from app.sanitary.domain.sanitary_company import SanitaryCompany
-
-Base = declarative_base()
 
 class SanitaryCompanyModel(Base):
     """

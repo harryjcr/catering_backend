@@ -44,15 +44,19 @@ from app.requests.infrastructure.persistence.work_schedule_repository_impl impor
 # SANITARY (nuevo)
 from app.sanitary.infrastructure.persistence.sanitary_policy_repository_impl import (
     PostgreSQLSanitaryPolicyRepository,
+    SanitaryPolicyModel,
 )
 from app.sanitary.infrastructure.persistence.incident_type_repository_impl import (
     PostgreSQLIncidentTypeRepository,
+    IncidentTypeModel,
 )
 from app.sanitary.infrastructure.persistence.sanitary_review_repository_impl import (
     PostgreSQLSanitaryReviewRepository,
+    SanitaryReviewModel,
 )
 from app.sanitary.infrastructure.persistence.sanitary_company_repository_impl import (
     PostgreSQLSanitaryCompanyRepository,
+    SanitaryCompanyModel,
 )
 
 
@@ -84,7 +88,11 @@ app.add_middleware(
 )
 
 
-async def get_context(request: Request) -> dict:
+async def get_context(request: Request):
+    """
+    Context provider for GraphQL using async generator pattern.
+    This ensures the session commits after the GraphQL operation completes.
+    """
     authorization = request.headers.get("authorization")
 
     async with get_db_session() as session:
@@ -145,7 +153,7 @@ async def get_context(request: Request) -> dict:
             except AuthenticationException:
                 pass
 
-        return {
+        context = {
             "request": request,
             "session": session,
             "settings": settings,
@@ -183,6 +191,10 @@ async def get_context(request: Request) -> dict:
 
             "current_user": current_user,
         }
+
+        # Yield the context and let Strawberry execute the query
+        # After yield, the async with block will commit the session
+        yield context
 
 
 graphql_app = GraphQLRouter(

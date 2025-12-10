@@ -8,9 +8,8 @@ from sqlalchemy.future import select
 from sqlalchemy.dialects.postgresql import UUID
 import uuid
 import sqlalchemy as sa
-from sqlalchemy.orm import declarative_base
 
-Base = declarative_base()
+from app.shared.database.connection import Base
 
 
 class ActivationTokenModel(Base):

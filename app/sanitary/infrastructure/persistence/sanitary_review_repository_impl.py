@@ -6,14 +6,13 @@ import sqlalchemy as sa
 from sqlalchemy.dialects.postgresql import UUID as PG_UUID
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
-from sqlalchemy.orm import Mapped, mapped_column, declarative_base
+from sqlalchemy.orm import Mapped, mapped_column
 
+from app.shared.database.connection import Base
 from app.sanitary.application.ports.sanitary_review_repository import (
     SanitaryReviewRepository,
 )
 from app.sanitary.domain.sanitary_review import SanitaryReview
-
-Base = declarative_base()
 
 class SanitaryReviewModel(Base):
     """
@@ -141,6 +140,7 @@ class PostgreSQLSanitaryReviewRepository(SanitaryReviewRepository):
             self._session.add(model)
 
         await self._session.flush()
+        # Don't commit here - let the context manager handle it
         return self._to_domain(model)
 
     async def list_by_policy_and_period(

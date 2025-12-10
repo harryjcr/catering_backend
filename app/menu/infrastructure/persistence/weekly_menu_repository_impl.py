@@ -5,13 +5,13 @@ import sqlalchemy as sa
 from sqlalchemy.dialects.postgresql import UUID as PG_UUID
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
 from sqlalchemy.future import select
-from sqlalchemy.orm import declarative_base
 from sqlalchemy import Column, Integer, String
+
+from app.shared.database.connection import Base
 
 from app.menu.application.ports.weekly_menu_repository import WeeklyMenuRepository
 from app.menu.domain.weekly_menu import WeeklyMenu
 
-Base = declarative_base()
 
 
 class WeeklyMenuModel(Base):

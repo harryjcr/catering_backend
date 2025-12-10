@@ -5,13 +5,13 @@ import sqlalchemy as sa
 from sqlalchemy.dialects.postgresql import UUID as PG_UUID
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
 from sqlalchemy.future import select
-from sqlalchemy.orm import declarative_base
 from sqlalchemy import Column, String, Integer, Float
+
+from app.shared.database.connection import Base
 
 from app.menu.application.ports.meal_component_repository import MealComponentRepository
 from app.menu.domain.meal_component import MealComponent
 
-Base = declarative_base()
 
 
 class MealComponentModel(Base):

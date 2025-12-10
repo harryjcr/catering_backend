@@ -6,16 +6,14 @@ import uuid
 from sqlalchemy import Column, String, DateTime, Boolean, Integer, Float, JSON, Date, Time
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
-from sqlalchemy.orm import declarative_base
 from sqlalchemy.dialects.postgresql import UUID
 
+from app.shared.database.connection import Base
 from app.attendance.domain.attendance import Attendance
 from app.attendance.domain.attendance_status import AttendanceStatus, AttendanceType
 from app.attendance.domain.geolocation import Geolocation
 from app.attendance.domain.break_period import BreakPeriod, BreakStatus
 from app.attendance.application.ports.attendance_repository import AttendanceRepository
-
-Base = declarative_base()
 
 
 class AttendanceModel(Base):

@@ -1,5 +1,6 @@
 import datetime
 from typing import List
+from uuid import UUID
 
 import strawberry
 from strawberry.types import Info
@@ -229,12 +230,12 @@ class SanitaryMutations:
         )
 
         cmd = RegisterSanitaryReviewCommand(
-            policy_id=input.policy_id,
+            policy_id=UUID(input.policy_id),
             date=input.date,
             is_conform=input.is_conform,
             observation=input.observation,
-            incident_type_id=input.incident_type_id,
-            company_id=input.company_id,
+            incident_type_id=UUID(input.incident_type_id) if input.incident_type_id else None,
+            company_id=UUID(input.company_id) if input.company_id else None,
             user_id=current_user.id,
         )
 

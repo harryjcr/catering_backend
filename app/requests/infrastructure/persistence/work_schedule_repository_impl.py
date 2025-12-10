@@ -8,56 +8,13 @@ import sqlalchemy as sa
 from sqlalchemy import Column, String, Time, Date, DateTime, Boolean, Integer, JSON
 from sqlalchemy.dialects.postgresql import UUID as PG_UUID, ARRAY
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.orm import declarative_base
 from sqlalchemy.future import select
 
+from app.attendance.infrastructure.persistence.work_schedule_repository_impl import WorkScheduleModel
 from app.requests.application.ports.work_schedule_repository import (
     WorkScheduleRepository,
     WorkShiftSummary,
 )
-
-Base = declarative_base()
-
-class WorkScheduleModel(Base):
-    """
-    Modelo SQLAlchemy que representa la tabla work_schedules
-    creada en la migración 003_create_work_schedules_table.py
-
-    Esta tabla define el horario/turno asignado a un usuario,
-    incluyendo rango de vigencia (effective_from / effective_until),
-    tipo de turno (shift_type), y horas de inicio/fin.
-    """
-
-    __tablename__ = "work_schedules"
-
-    id = Column(PG_UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-
-    user_id = Column(PG_UUID(as_uuid=True), nullable=False, index=True)
-
-    # Ej: "morning", "afternoon", "night", "custom"
-    shift_type = Column(String(50), nullable=False, index=True)
-
-    start_time = Column(Time, nullable=False)
-    end_time = Column(Time, nullable=False)
-
-    working_days = Column(JSON, nullable=False)
-
-    late_tolerance_minutes = Column(Integer, nullable=False, server_default=sa.text("5"))
-    break_duration_minutes = Column(Integer, nullable=False, server_default=sa.text("30"))
-
-    is_active = Column(Boolean, nullable=False, server_default=sa.text("true"), index=True)
-
-    # Vigencia del turno
-    effective_from = Column(Date, nullable=False, index=True)
-    effective_until = Column(Date, nullable=True, index=True)
-
-    created_at = Column(
-        DateTime(timezone=True),
-        nullable=False,
-        server_default=sa.text("now()"),
-    )
-    created_by = Column(PG_UUID(as_uuid=True), nullable=True)
-    notes = Column(String(500), nullable=True)
 
 
 class PostgreSQLWorkScheduleRepository(WorkScheduleRepository):

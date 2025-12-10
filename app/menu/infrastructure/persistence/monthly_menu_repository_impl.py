@@ -6,15 +6,15 @@ from datetime import datetime
 
 from sqlalchemy.dialects.postgresql import UUID as PG_UUID, insert as pg_insert
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
-from sqlalchemy.orm import declarative_base
 from sqlalchemy.future import select
 from sqlalchemy import Column, Integer, String, DateTime, text
+
+from app.shared.database.connection import Base
 
 from app.menu.application.ports.monthly_menu_repository import MonthlyMenuRepository
 from app.menu.domain.monthly_menu import MonthlyMenu
 from app.menu.domain.menu_enums import MenuStatus
 
-Base = declarative_base()
 
 class MonthlyMenuModel(Base):
     __tablename__ = "monthly_menus"

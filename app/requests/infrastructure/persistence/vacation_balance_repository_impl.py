@@ -7,13 +7,11 @@ import sqlalchemy as sa
 from sqlalchemy import Column, Integer, DateTime
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
-from sqlalchemy.orm import declarative_base
 from sqlalchemy.dialects.postgresql import UUID
 
+from app.shared.database.connection import Base
 from app.requests.domain.vacation_balance import VacationBalance
 from app.requests.application.ports.vacation_balance_repository import VacationBalanceRepository
-
-Base = declarative_base()
 
 
 class VacationBalanceModel(Base):

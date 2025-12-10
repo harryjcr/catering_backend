@@ -6,13 +6,13 @@ import sqlalchemy as sa
 from sqlalchemy.dialects.postgresql import UUID as PG_UUID
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
 from sqlalchemy.future import select
-from sqlalchemy.orm import declarative_base
 from sqlalchemy import Column, Date, String, Boolean, DateTime, text
+
+from app.shared.database.connection import Base
 
 from app.menu.application.ports.daily_menu_repository import DailyMenuRepository
 from app.menu.domain.daily_menu import DailyMenu
 
-Base = declarative_base()
 
 
 class DailyMenuModel(Base):

@@ -7,14 +7,12 @@ import sqlalchemy as sa
 from sqlalchemy import Column, String, Date, Integer, DateTime, JSON
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
-from sqlalchemy.orm import declarative_base
 from sqlalchemy.dialects.postgresql import UUID
 
+from app.shared.database.connection import Base
 from app.requests.domain.time_off_request import TimeOffRequest
 from app.requests.domain.request_status import RequestStatus, RequestType
 from app.requests.application.ports.time_off_request_repository import TimeOffRequestRepository
-
-Base = declarative_base()
 
 
 class TimeOffRequestModel(Base):

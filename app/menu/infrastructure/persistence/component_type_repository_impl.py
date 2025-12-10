@@ -5,14 +5,15 @@ import sqlalchemy as sa
 from sqlalchemy.dialects.postgresql import UUID as PG_UUID
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
-from sqlalchemy.orm import Mapped, mapped_column, declarative_base
+from sqlalchemy.orm import Mapped, mapped_column
+
+from app.shared.database.connection import Base
 
 from app.menu.application.ports.component_type_repository import (
     ComponentTypeRepository,
 )
 from app.menu.domain.component_type import ComponentType
 
-Base = declarative_base()
 
 class ComponentTypeModel(Base):
     __tablename__ = "component_types"

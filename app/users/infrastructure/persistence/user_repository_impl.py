@@ -9,11 +9,10 @@ import sqlalchemy as sa
 from sqlalchemy import Column, String, DateTime, Boolean, JSON, Enum as SQLEnum
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
-from sqlalchemy.orm import declarative_base
 from sqlalchemy.dialects.postgresql import UUID
 import uuid
 
-Base = declarative_base()
+from app.shared.database.connection import Base
 
 class UserModel(Base):
     """Modelo SQLAlchemy para PostgreSQL"""

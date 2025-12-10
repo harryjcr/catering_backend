@@ -7,14 +7,12 @@ import sqlalchemy as sa
 from sqlalchemy import Column, String, DateTime
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
-from sqlalchemy.orm import declarative_base
 from sqlalchemy.dialects.postgresql import UUID
 
+from app.shared.database.connection import Base
 from app.requests.domain.shift_swap_request import ShiftSwapRequest
 from app.requests.domain.request_status import SwapStatus
 from app.requests.application.ports.shift_swap_repository import ShiftSwapRepository
-
-Base = declarative_base()
 
 
 class ShiftSwapRequestModel(Base):

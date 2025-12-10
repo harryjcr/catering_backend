@@ -5,15 +5,15 @@ from datetime import date, datetime
 
 from sqlalchemy.dialects.postgresql import UUID as PG_UUID
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.orm import declarative_base
 from sqlalchemy.future import select
 from sqlalchemy import Column, Date, String, DateTime
+
+from app.shared.database.connection import Base
 
 from app.menu.application.ports.menu_change_repository import MenuChangeRepository
 from app.menu.domain.menu_change_request import MenuChangeRequest
 from app.menu.domain.menu_enums import MealType, ChangeStatus
 
-Base = declarative_base()
 
 class MenuChangeModel(Base):
     __tablename__ = "menu_change_requests"

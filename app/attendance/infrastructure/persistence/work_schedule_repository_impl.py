@@ -6,13 +6,11 @@ import uuid
 from sqlalchemy import Column, String, DateTime, Boolean, Integer, JSON, Date, Time
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
-from sqlalchemy.orm import declarative_base
 from sqlalchemy.dialects.postgresql import UUID
 
+from app.shared.database.connection import Base
 from app.attendance.domain.work_schedule import WorkSchedule, ShiftType
 from app.attendance.application.ports.work_schedule_repository import WorkScheduleRepository
-
-Base = declarative_base()
 
 class WorkScheduleModel(Base):
     """Modelo SQLAlchemy para horarios de trabajo"""

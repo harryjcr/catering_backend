@@ -119,7 +119,7 @@ class RegisterSanitaryReviewUseCase:
             if incident_type.policy_id != cmd.policy_id:
                 return {
                     "success": False,
-                    "message": "El tipo de incidencia no pertenece a la política seleccionada.",
+                    "message": f"El tipo de incidencia '{incident_type.name}' (policy_id: {incident_type.policy_id}) no pertenece a la política seleccionada (policy_id: {cmd.policy_id}).",
                     "review": None,
                 }
 
